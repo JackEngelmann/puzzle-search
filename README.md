@@ -13,3 +13,7 @@
 
 - run `play-puzzle --size 3 --user` to play manually
 - run `play-puzzle --size 3` to let agent using search algorithm play
+
+## Run Tests
+
+- run install tox (`pip install tox`) and run `tox`
