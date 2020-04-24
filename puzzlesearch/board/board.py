@@ -10,9 +10,12 @@ actions = ["right", "down", "up", "left"]
 
 
 class Board:
-    def __init__(self, size):
+    def __init__(self, size, state=None):
         self.size = size
-        self.__initialize_state()
+        if state == None:
+            self.state = self.__get_initial_state()
+        else:
+            self.state = state
 
     def get_field(self, col_idx, row_idx):
         return self.state[row_idx][col_idx]
@@ -46,7 +49,7 @@ class Board:
         board.state = [row.copy() for row in self.state]
         return board
 
-    def __initialize_state(self):
+    def __get_initial_state(self):
         size = self.size
         state = []
 
@@ -58,7 +61,7 @@ class Board:
                 else:
                     state[row_idx].append(row_idx * size + col_idx)
 
-        self.state = state
+        return state
 
     def __field_is_won(self, col_idx, row_idx):
         field = self.get_field(col_idx, row_idx)
