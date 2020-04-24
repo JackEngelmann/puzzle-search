@@ -6,30 +6,66 @@ class Node:
         self.path_cost = path_cost
 
 
+class Frontier:
+    def __init__(self, node_list, get_hash):
+        self.node_list = node_list
+        self.hash_set = set([get_hash(n.state) for n in node_list])
+        self.get_hash = get_hash
+
+    def add(self, node):
+        self.node_list.append(node)
+        self.hash_set.add(self.get_hash(node.state))
+
+    def includes(self, node):
+        return self.get_hash(node.state) in self.hash_set
+
+    def pop(self):
+        popped = self.node_list.pop()
+        popped_hash = self.get_hash(popped.state)
+        self.hash_set.remove(popped_hash)
+        return popped
+
+    def is_empty(self):
+        return len(self.node_list) == 0
+
+
+class ExploredSet:
+    def __init__(self, get_hash):
+        self.hash_set = set()
+        self.get_hash = get_hash
+
+    def add(self, node):
+        self.hash_set.add(self.get_hash(node.state))
+
+    def includes(self, node):
+        return self.get_hash(node.state) in self.hash_set
+
+
 class GraphSearch:
     def search(self, problem):
-        frontier = [Node(problem.initial_state)]
-        frontier_hash = set([problem.get_state_hash(problem.initial_state)])
-        explored_set_hash = set()
+        initial_node = Node(problem.initial_state)
+        frontier = Frontier([initial_node], problem.get_state_hash)
+
+        explored_set = ExploredSet(problem.get_state_hash)
 
         while True:
-            if len(frontier) == 0:
+            if frontier.is_empty():
                 return None
+
             leaf_node = frontier.pop()
-            frontier_hash.remove(problem.get_state_hash(leaf_node.state))
+
             if problem.is_goal(leaf_node.state):
                 return leaf_node
-            explored_set_hash.add(problem.get_state_hash(leaf_node.state))
 
-            # expand node
+            explored_set.add(leaf_node)
+
             new_nodes = self.__expand_node(problem, leaf_node)
+
             for new_node in new_nodes:
-                new_node_hash = problem.get_state_hash(new_node.state)
-                if (not (new_node_hash in explored_set_hash)) and (
-                    not (new_node_hash in frontier_hash)
+                if not frontier.includes(new_node) and not explored_set.includes(
+                    new_node
                 ):
-                    frontier.append(new_node)
-                    frontier_hash.add(new_node_hash)
+                    frontier.add(new_node)
 
     def __expand_node(self, problem, node):
         new_nodes = []
