@@ -78,7 +78,15 @@ class TestBoard(unittest.TestCase):
         board = Board(size=2)
         self.assertEqual(board_str, board.__str__())
 
+    def test_is_won_true(self):
+        board = Board(size=2)
+        self.assertTrue(board.is_won())
+
+    def test_is_won_false(self):
+        board = Board(size=2)
+        board.move_right()
+        self.assertFalse(board.is_won())
+
 
 "-----\n| |1|\n-----\n|2|3|\n-----"
 "-----\n| |1|-----\n|2|3|\n-----"
-

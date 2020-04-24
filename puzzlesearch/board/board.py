@@ -1,3 +1,5 @@
+from itertools import product
+
 """
 TODO:
 - size < 2: throw error
@@ -78,3 +80,13 @@ class Board:
             self.state[pos_1[1]][pos_1[0]],
         )
 
+    def is_won(self):
+        positions = product(range(self.size), repeat=2)
+        return all([self.__field_is_won(*p) for p in positions])
+
+    def __field_is_won(self, col_idx, row_idx):
+        field = self.get_field(col_idx, row_idx)
+        if col_idx == 0 and row_idx == 0:
+            return field == None
+        target = row_idx * self.size + col_idx
+        return field == target
