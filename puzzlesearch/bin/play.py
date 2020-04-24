@@ -1,38 +1,24 @@
+import argparse
+
 from puzzlesearch.board.board import Board
+from puzzlesearch.player.agent import PlayerAgent
+from puzzlesearch.player.user import PlayerUser
 from puzzlesearch.game.game import Game
 
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--user", action="store_true")
+    parser.add_argument("--size", default=2, type=int)
+    return parser.parse_args()
+
+
 def main():
-    board = Board(2)
-    game = Game(board)
-    game.scramble()
-    while True:
-        print(board)
-        print("Input: ")
-        inp = get_input()
-        if is_exit(inp):
-            break
-        execute_command(board, inp)
-
-        if game.is_won():
-            print("Congratulations")
-            break
-
-
-def get_input():
-    return input().rstrip("\n")
-
-
-def execute_command(board, inp):
-    if inp == "r":
-        board.move_right()
-    if inp == "l":
-        board.move_left()
-    if inp == "u":
-        board.move_up()
-    if inp == "d":
-        board.move_down()
-
-
-def is_exit(inp):
-    return inp == "e"
+    args = parse_args()
+    board = Board(args.size)
+    if args.user:
+        player = PlayerUser()
+    else:
+        player = PlayerAgent()
+    game = Game(board, player)
+    game.start()

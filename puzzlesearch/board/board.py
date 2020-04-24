@@ -1,3 +1,4 @@
+import random
 from itertools import product
 
 """
@@ -17,7 +18,7 @@ class Board:
         board.none_position = (self.none_position[0], self.none_position[1])
         return board
 
-    def __initialize_state(self,):
+    def __initialize_state(self):
         size = self.size
         state = []
 
@@ -99,3 +100,26 @@ class Board:
             return field == None
         target = row_idx * self.size + col_idx
         return field == target
+
+    def scramble(self):
+        no_moves = random.randint(3, 100)
+        for _ in range(no_moves):
+            rand_move = random.randint(0, 3)
+            if rand_move == 0:
+                self.move_right()
+            if rand_move == 1:
+                self.move_left()
+            if rand_move == 2:
+                self.move_down()
+            if rand_move == 3:
+                self.move_up()
+
+    def execute_action(self, action):
+        if action == "right":
+            self.move_right()
+        if action == "left":
+            self.move_left()
+        if action == "down":
+            self.move_down()
+        if action == "up":
+            self.move_up()
