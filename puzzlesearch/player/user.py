@@ -1,6 +1,10 @@
+from puzzlesearch.board.board import Board
+
+
 class PlayerUser:
     def do_move(self, board):
-        print("Input: (down, up, left, right) ")
+        print(f"Available Actions: ({', '.join(Board.actions)})")
+        print("Input:")
         inp = get_input()
         action = get_action(inp)
         if action == None:

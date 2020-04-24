@@ -16,6 +16,9 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.get_field(0, 1), 2)
         self.assertEqual(board.get_field(1, 1), 3)
 
+    def test_initialize_size_to_small(self):
+        self.assertRaises(AssertionError, Board, size=1)
+
     def test_move_right(self):
         board = Board(size=2)
         board.move("right")

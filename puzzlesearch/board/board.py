@@ -1,17 +1,15 @@
 import random
 from itertools import product
 
-"""
-TODO:
-- size < 2: throw error
-"""
-
-actions = ["right", "down", "up", "left"]
-
 
 class Board:
+    actions = ["right", "down", "up", "left"]
+
     def __init__(self, size, state=None):
+        assert size >= 2
+
         self.size = size
+
         if state == None:
             self.state = self.__get_initial_state()
         else:
@@ -32,7 +30,7 @@ class Board:
         return all([self.__field_is_won(*p) for p in positions])
 
     def move(self, action):
-        assert action in actions
+        assert action in Board.actions
         none_position = self.get_none_position()
         new_none_position = get_new_position(none_position, action)
         if is_valid_position(new_none_position, self.size):
@@ -41,7 +39,7 @@ class Board:
     def scramble(self):
         no_moves = random.randint(3, 100)
         for _ in range(no_moves):
-            action = random.choice(actions)
+            action = random.choice(Board.actions)
             self.move(action)
 
     def copy(self):
@@ -89,7 +87,7 @@ class Board:
 
 
 def get_new_position(pos, direction):
-    assert direction in ["right", "left", "down", "up"]
+    assert direction in Board.actions
     if direction == "right":
         return (pos[0] + 1, pos[1])
     if direction == "left":

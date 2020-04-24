@@ -1,7 +1,7 @@
 class PuzzleProblem:
     def __init__(self, board):
         self.initial_state = board
-        self.actions = ["left", "right", "down", "up"]
+        self.actions = board.actions
 
     def result(self, board, action):
         assert board != None
