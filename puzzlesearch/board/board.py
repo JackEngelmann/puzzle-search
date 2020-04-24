@@ -11,6 +11,12 @@ class Board:
         self.size = size
         self.__initialize_state()
 
+    def copy(self):
+        board = Board(self.size)
+        board.state = [row.copy() for row in self.state]
+        board.none_position = (self.none_position[0], self.none_position[1])
+        return board
+
     def __initialize_state(self,):
         size = self.size
         state = []
@@ -73,6 +79,9 @@ class Board:
             b_str += "\n"
         b_str += "-" * (self.size * 2 + 1)
         return b_str
+
+    def get_hash(self):
+        return str(self.state)
 
     def __swap(self, pos_1, pos_2):
         self.state[pos_1[1]][pos_1[0]], self.state[pos_2[1]][pos_2[0]] = (
