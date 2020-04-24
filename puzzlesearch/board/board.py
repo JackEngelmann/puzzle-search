@@ -6,6 +6,8 @@ TODO:
 - size < 2: throw error
 """
 
+actions = ["right", "down", "up", "left"]
+
 
 class Board:
     def __init__(self, size):
@@ -104,17 +106,11 @@ class Board:
     def scramble(self):
         no_moves = random.randint(3, 100)
         for _ in range(no_moves):
-            rand_move = random.randint(0, 3)
-            if rand_move == 0:
-                self.move_right()
-            if rand_move == 1:
-                self.move_left()
-            if rand_move == 2:
-                self.move_down()
-            if rand_move == 3:
-                self.move_up()
+            action = random.choice(actions)
+            self.execute_action(action)
 
     def execute_action(self, action):
+        assert action in actions
         if action == "right":
             self.move_right()
         if action == "left":
