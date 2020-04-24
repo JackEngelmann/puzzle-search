@@ -27,12 +27,10 @@ class PlayerMock:
 class TestGame(unittest.TestCase):
     def test_start(self):
         with mock.patch("sys.stdout") as mock_stdout:
-            # arrange
             board = BoardMock()
             player = PlayerMock()
             game = Game(board, player)
 
-            # act
             game.start()
 
             self.assertEqual(board.moves_made, 2)
