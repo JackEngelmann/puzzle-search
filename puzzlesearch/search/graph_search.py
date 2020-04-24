@@ -27,6 +27,7 @@ class GraphSearch:
     def __expand_node(self, problem, node):
         new_nodes = []
         for action in problem.actions:
+            print(node.state)
             resulting_state = problem.result(node.state, action)
             path_cost = node.path_cost + problem.path_cost(node.state, action)
             new_nodes.append(Node(resulting_state, node, path_cost, action))

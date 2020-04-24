@@ -24,16 +24,10 @@ class PuzzleProblem:
         self.actions = ["left", "right", "down", "up"]
 
     def result(self, board, action):
-        board = board.copy()
-        if action == "right":
-            board.move_right()
-        if action == "left":
-            board.move_left()
-        if action == "down":
-            board.move_down()
-        if action == "up":
-            board.move_up()
-        return board
+        assert board != None
+        resulting_board = board.copy()
+        resulting_board.move(action)
+        return resulting_board
 
     def is_goal(self, board):
         return board.is_won()

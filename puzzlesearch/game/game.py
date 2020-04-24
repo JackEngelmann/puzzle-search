@@ -19,7 +19,7 @@ class Game:
             print("Congratulations")
             return True
         action = self.player.do_move(self.board)
-        self.board.execute_action(action)
+        self.board.move(action)
         self.__print_separator()
         return False
 
