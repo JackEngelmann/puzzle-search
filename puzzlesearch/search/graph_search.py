@@ -45,15 +45,11 @@ class GraphSearch:
 
 
 class Node:
-    next_id = 0
-
     def __init__(self, state, parent=None, path_cost=0, action=None):
         self.state = state
         self.parent = parent
         self.action = action
         self.path_cost = path_cost
-        self.id = Node.next_id
-        Node.next_id += 1
 
 
 class Frontier:
