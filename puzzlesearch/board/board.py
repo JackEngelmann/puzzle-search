@@ -20,16 +20,20 @@ class Board:
     def get_hash(self):
         return str(self.state)
 
+    def get_none_position(self):
+        positions = product(range(self.size), repeat=2)
+        return next(p for p in positions if self.get_field(*p) == None)
+
     def is_won(self):
         positions = product(range(self.size), repeat=2)
         return all([self.__field_is_won(*p) for p in positions])
 
     def move(self, action):
         assert action in actions
-        new_none_position = get_new_position(self.none_position, action)
+        none_position = self.get_none_position()
+        new_none_position = get_new_position(none_position, action)
         if is_valid_position(new_none_position, self.size):
-            self.__swap(self.none_position, new_none_position)
-            self.none_position = new_none_position
+            self.__swap(none_position, new_none_position)
 
     def scramble(self):
         no_moves = random.randint(3, 100)
@@ -40,7 +44,6 @@ class Board:
     def copy(self):
         board = Board(self.size)
         board.state = [row.copy() for row in self.state]
-        board.none_position = (self.none_position[0], self.none_position[1])
         return board
 
     def __initialize_state(self):
@@ -56,7 +59,6 @@ class Board:
                     state[row_idx].append(row_idx * size + col_idx)
 
         self.state = state
-        self.none_position = (0, 0)
 
     def __field_is_won(self, col_idx, row_idx):
         field = self.get_field(col_idx, row_idx)
