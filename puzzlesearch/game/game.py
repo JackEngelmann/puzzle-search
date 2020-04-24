@@ -7,7 +7,6 @@ class Game:
         self.player = player
 
     def start(self):
-        self.board.scramble()
         finished = False
         while not finished:
             finished = self.__play_round()

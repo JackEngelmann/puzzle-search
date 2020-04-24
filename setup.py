@@ -7,4 +7,5 @@ setup(
     packages=find_packages(),
     entry_points={"console_scripts": ["play-puzzle=puzzlesearch.bin.play:main"],},
     python_requires=">=3.6",
+    tests_require=["mock"],
 )

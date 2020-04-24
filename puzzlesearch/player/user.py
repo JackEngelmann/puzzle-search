@@ -22,4 +22,3 @@ def get_action(inp):
         return "down"
     if inp in ["up", "k"]:
         return "up"
-    return None
