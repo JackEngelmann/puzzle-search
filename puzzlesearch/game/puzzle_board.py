@@ -2,7 +2,7 @@ import random
 from itertools import product
 
 
-class Board:
+class PuzzleBoard:
     actions = ["right", "down", "up", "left"]
 
     def __init__(self, size, state=None):
@@ -30,7 +30,7 @@ class Board:
         return all([self.__field_is_won(*p) for p in positions])
 
     def move(self, action):
-        assert action in Board.actions
+        assert action in PuzzleBoard.actions
         none_position = self.get_none_position()
         new_none_position = get_new_position(none_position, action)
         if is_valid_position(new_none_position, self.size):
@@ -39,11 +39,11 @@ class Board:
     def scramble(self):
         no_moves = random.randint(3, 100)
         for _ in range(no_moves):
-            action = random.choice(Board.actions)
+            action = random.choice(PuzzleBoard.actions)
             self.move(action)
 
     def copy(self):
-        board = Board(self.size)
+        board = PuzzleBoard(self.size)
         board.state = [row.copy() for row in self.state]
         return board
 
@@ -87,7 +87,7 @@ class Board:
 
 
 def get_new_position(pos, direction):
-    assert direction in Board.actions
+    assert direction in PuzzleBoard.actions
     if direction == "right":
         return (pos[0] + 1, pos[1])
     if direction == "left":

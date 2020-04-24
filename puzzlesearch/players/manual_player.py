@@ -1,9 +1,9 @@
-from puzzlesearch.board.board import Board
+from puzzlesearch.game.puzzle_board import PuzzleBoard
 
 
-class PlayerUser:
+class ManualPlayer:
     def do_move(self, board):
-        print(f"Available Actions: ({', '.join(Board.actions)})")
+        print(f"Available Actions: ({', '.join(PuzzleBoard.actions)})")
         print("Input:")
         inp = get_input()
         action = get_action(inp)

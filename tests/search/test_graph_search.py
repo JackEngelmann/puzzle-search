@@ -1,7 +1,7 @@
 import unittest
-from puzzlesearch.board.board import Board
+from puzzlesearch.game.puzzle_board import PuzzleBoard
 from puzzlesearch.game.game import Game
-from puzzlesearch.problem.puzzle_problem import PuzzleProblem
+from puzzlesearch.search.puzzle_problem import PuzzleProblem
 from puzzlesearch.search.graph_search import GraphSearch
 
 
@@ -28,7 +28,7 @@ class UnsolvableProblem:
 
 class TestGraphSearch(unittest.TestCase):
     def test_search_simple(self):
-        board = Board(size=2)
+        board = PuzzleBoard(size=2)
         board.move("right")
         problem = PuzzleProblem(board)
         graph_search = GraphSearch()
@@ -36,7 +36,7 @@ class TestGraphSearch(unittest.TestCase):
         self.__assert_successful_actions(board, solution)
 
     def test_search_scrambled(self):
-        board = Board(size=3)
+        board = PuzzleBoard(size=3)
         board.scramble()
         problem = PuzzleProblem(board)
         graph_search = GraphSearch()
@@ -44,7 +44,7 @@ class TestGraphSearch(unittest.TestCase):
         self.__assert_successful_actions(board, solution)
 
     def test_search_already_winning(self):
-        board = Board(size=2)
+        board = PuzzleBoard(size=2)
         problem = PuzzleProblem(board)
         graph_search = GraphSearch()
         solution = graph_search.search(problem)

@@ -1,7 +1,7 @@
 from puzzlesearch.search.graph_search import GraphSearch
 
 
-class PlayerAgent:
+class AgentPlayer:
     def __init__(self, plan_actions):
         self.planned_actions = None
         self.plan_actions = plan_actions
