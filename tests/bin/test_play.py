@@ -16,7 +16,7 @@ class TestPlay(unittest.TestCase):
 
     def test_main_user_no_exceptions(self):
         """
-        Thie test only checks that main runs with user playing manually.
+        The test only checks that main runs with user playing manually.
         The mock_inp raises an error to stop the game after the first user input.
         It is only checked that no other exception is raised before.
         """
