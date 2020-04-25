@@ -39,7 +39,7 @@ def main(args=sys.argv[1:]):
         board.move(action)
 
     def is_finished():
-        return board.is_won()
+        return board.is_finished()
 
     game = Game(take_turn, is_finished, print_turn)
     game.start()

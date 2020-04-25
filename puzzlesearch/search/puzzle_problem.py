@@ -10,7 +10,7 @@ class PuzzleProblem:
         return resulting_board
 
     def is_goal(self, board):
-        return board.is_won()
+        return board.is_finished()
 
     def path_cost(self, board, action):
         return 1

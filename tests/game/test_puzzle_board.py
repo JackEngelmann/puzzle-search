@@ -96,10 +96,10 @@ class TestPuzzleBoard(unittest.TestCase):
         none_position = board.get_none_position()
         self.assertEqual(none_position, (1, 0))
 
-    def test_is_won_true(self):
+    def test_is_finished_true(self):
         board = PuzzleBoard(size=2, state=[[None, 1], [2, 3]])
-        self.assertTrue(board.is_won())
+        self.assertTrue(board.is_finished())
 
-    def test_is_won_false(self):
+    def test_is_finished_false(self):
         board = PuzzleBoard(size=2, state=[[1, None], [2, 3]])
-        self.assertFalse(board.is_won())
+        self.assertFalse(board.is_finished())

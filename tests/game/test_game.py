@@ -12,7 +12,7 @@ class BoardMock:
     def __str__(self):
         return "BoardMock"
 
-    def is_won(self):
+    def is_finished(self):
         return self.moves_made == 2
 
     def move(self, action):
@@ -34,7 +34,7 @@ class TestGame(unittest.TestCase):
                 action = player.do_move(board)
                 board.move(action)
 
-            game = Game(take_turn=take_turn, is_finished=lambda: board.is_won(),)
+            game = Game(take_turn=take_turn, is_finished=lambda: board.is_finished(),)
             game.start()
             self.assertEqual(board.moves_made, 2)
             mock_stdout.assert_has_calls([mock.call.write(Game.congratulation_message)])

@@ -60,4 +60,4 @@ class TestGraphSearch(unittest.TestCase):
         self.assertIsNotNone(solution)
         for direction in solution:
             board.move(direction)
-        self.assertTrue(board.is_won())
+        self.assertTrue(board.is_finished())

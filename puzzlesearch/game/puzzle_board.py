@@ -25,9 +25,9 @@ class PuzzleBoard:
         positions = product(range(self.size), repeat=2)
         return next(p for p in positions if self.get_field(*p) == None)
 
-    def is_won(self):
+    def is_finished(self):
         positions = product(range(self.size), repeat=2)
-        return all([self.__field_is_won(*p) for p in positions])
+        return all([self.__field_is_finished(*p) for p in positions])
 
     def move(self, action):
         assert action in PuzzleBoard.actions
@@ -61,7 +61,7 @@ class PuzzleBoard:
 
         return state
 
-    def __field_is_won(self, col_idx, row_idx):
+    def __field_is_finished(self, col_idx, row_idx):
         field = self.get_field(col_idx, row_idx)
         if col_idx == 0 and row_idx == 0:
             return field == None
