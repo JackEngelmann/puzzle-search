@@ -1,10 +1,18 @@
 import random
 
 
+def noop():
+    pass
+
+
 class Game:
-    def __init__(self, board, player):
-        self.board = board
-        self.player = player
+    congratulation_message = "Congratulations, you won! :)"
+    separator = "---------------------------------------------------------"
+
+    def __init__(self, take_turn, is_finished, print_turn=noop):
+        self.take_turn = take_turn
+        self.is_finished = is_finished
+        self.print_turn = print_turn
 
     def start(self):
         finished = False
@@ -12,15 +20,13 @@ class Game:
             finished = self.__play_round()
 
     def __play_round(self):
-        print(self.board)
-        if self.board.is_won():
-            self.__print_separator()
-            print("Congratulations")
-            return True
-        action = self.player.do_move(self.board)
-        self.board.move(action)
-        self.__print_separator()
-        return False
+        self.print_turn()
 
-    def __print_separator(self):
-        print("---------------------------------------------------------")
+        if self.is_finished():
+            print(self.separator)
+            print(self.congratulation_message)
+            return True
+
+        self.take_turn()
+        print(self.separator)
+        return False

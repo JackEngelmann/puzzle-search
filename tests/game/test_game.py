@@ -29,9 +29,12 @@ class TestGame(unittest.TestCase):
         with mock.patch("sys.stdout") as mock_stdout:
             board = BoardMock()
             player = PlayerMock()
-            game = Game(board, player)
 
+            def take_turn():
+                action = player.do_move(board)
+                board.move(action)
+
+            game = Game(take_turn=take_turn, is_finished=lambda: board.is_won(),)
             game.start()
-
             self.assertEqual(board.moves_made, 2)
-            mock_stdout.assert_has_calls([mock.call.write("Congratulations")])
+            mock_stdout.assert_has_calls([mock.call.write(Game.congratulation_message)])

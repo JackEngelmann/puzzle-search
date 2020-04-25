@@ -25,9 +25,21 @@ def main(args=sys.argv[1:]):
     parsed_args = parse_args(args)
     board = PuzzleBoard(parsed_args.size)
     board.scramble()
+
     if parsed_args.user:
         player = ManualPlayer()
     else:
         player = AgentPlayer(plan_actions)
-    game = Game(board, player)
+
+    def print_turn():
+        print(str(board))
+
+    def take_turn():
+        action = player.do_move(board)
+        board.move(action)
+
+    def is_finished():
+        return board.is_won()
+
+    game = Game(take_turn, is_finished, print_turn)
     game.start()
