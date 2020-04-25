@@ -2,6 +2,10 @@ import random
 from itertools import product
 
 
+def get_random_no_moves():
+    return random.randint(3, 100)
+
+
 class PuzzleBoard:
     actions = ["right", "down", "up", "left"]
 
@@ -27,7 +31,7 @@ class PuzzleBoard:
 
     def is_finished(self):
         positions = product(range(self.size), repeat=2)
-        return all([self.__field_is_finished(*p) for p in positions])
+        return all([self.__field_is_won(*p) for p in positions])
 
     def move(self, action):
         assert action in PuzzleBoard.actions
@@ -37,10 +41,13 @@ class PuzzleBoard:
             self.__swap(none_position, new_none_position)
 
     def scramble(self):
-        no_moves = random.randint(3, 100)
+        no_moves = get_random_no_moves()
         for _ in range(no_moves):
             action = random.choice(PuzzleBoard.actions)
             self.move(action)
+        if self.is_finished():
+            # the scrambled board should never be in a finished state
+            self.scramble()
 
     def copy(self):
         board = PuzzleBoard(self.size)
@@ -61,7 +68,7 @@ class PuzzleBoard:
 
         return state
 
-    def __field_is_finished(self, col_idx, row_idx):
+    def __field_is_won(self, col_idx, row_idx):
         field = self.get_field(col_idx, row_idx)
         if col_idx == 0 and row_idx == 0:
             return field == None

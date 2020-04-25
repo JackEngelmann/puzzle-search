@@ -6,7 +6,7 @@ class AgentPlayer:
         self.planned_actions = None
         self.plan_actions = plan_actions
 
-    def do_move(self, state):
+    def get_action(self, state):
         if self.planned_actions == None:
             print("starts planning")
             self.planned_actions = self.plan_actions(state)

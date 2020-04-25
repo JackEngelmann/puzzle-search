@@ -1,5 +1,6 @@
 import unittest
-from puzzlesearch.game.puzzle_board import PuzzleBoard
+import mock
+from puzzlesearch.game.puzzle_board import PuzzleBoard, get_random_no_moves
 
 board_str = """-----
 | |1|
@@ -103,3 +104,15 @@ class TestPuzzleBoard(unittest.TestCase):
     def test_is_finished_false(self):
         board = PuzzleBoard(size=2, state=[[1, None], [2, 3]])
         self.assertFalse(board.is_finished())
+
+    def test_scramble(self):
+        board = PuzzleBoard(size=2)
+        board.scramble()
+        self.assertFalse(board.is_finished())
+
+    def test_scramble_called_twice_when_first_is_finished(self):
+        board = PuzzleBoard(size=2)
+        mock_is_finished = mock.Mock(side_effect=[True, False])
+        board.is_finished = mock_is_finished
+        board.scramble()
+        self.assertEqual(mock_is_finished.call_count, 2)

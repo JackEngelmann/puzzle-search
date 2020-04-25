@@ -5,7 +5,7 @@ from puzzlesearch.players.manual_player import ManualPlayer
 
 
 class TestManualPlayer(unittest.TestCase):
-    def test_do_move_in_direction(self):
+    def test_get_action_in_direction(self):
         player = ManualPlayer()
         self.__assert_input_does_move("down", "down", player)
         self.__assert_input_does_move("j", "down", player)
@@ -18,14 +18,14 @@ class TestManualPlayer(unittest.TestCase):
 
     def __assert_input_does_move(self, input_, action, player):
         with mock.patch("builtins.input", lambda: input_):
-            self.assertEqual(player.do_move(None), action)
+            self.assertEqual(player.get_action(None), action)
 
-    def test_do_move_repeat_when_unknown_iput(self):
+    def test_get_action_repeat_when_unknown_iput(self):
         player = ManualPlayer()
 
         mock_input = mock.Mock(side_effect=["unknown-input", "down"])
 
         with mock.patch("builtins.input", mock_input):
-            action = player.do_move(None)
+            action = player.get_action(None)
             self.assertEqual(mock_input.call_count, 2)
             self.assertEqual(action, "down")
