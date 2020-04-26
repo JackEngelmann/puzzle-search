@@ -1,11 +1,12 @@
 import unittest
 
-from puzzlesearch.players.agent_player import AgentPlayer
+from puzzlesearch.games.player_agent import PlayerAgent
 
 
-class TestAgentPlayer(unittest.TestCase):
+class TestPlayerAgent(unittest.TestCase):
     def test_get_action(self):
-        agent = AgentPlayer(lambda state: [1, 2, 3])
+        agent = PlayerAgent()
+        agent.plan_actions = lambda state: [1, 2, 3]
         actions = [
             agent.get_action(None),
             agent.get_action(None),
@@ -14,9 +15,11 @@ class TestAgentPlayer(unittest.TestCase):
         self.assertEqual(actions, [1, 2, 3])
 
     def test_get_action_no_actions(self):
-        agent = AgentPlayer(lambda state: [])
+        agent = PlayerAgent()
+        agent.plan_actions = lambda state: []
         self.assertRaises(RuntimeError, agent.get_action, None)
 
     def test_get_action_planned_actions_none(self):
-        agent = AgentPlayer(lambda state: None)
+        agent = PlayerAgent()
+        agent.plan_actions = lambda state: None
         self.assertRaises(RuntimeError, agent.get_action, None)

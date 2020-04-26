@@ -1,27 +1,27 @@
 import sys
 import argparse
 
-from puzzlesearch.players.agent_player import AgentPlayer
-from puzzlesearch.players.manual_player import ManualPlayer
-from puzzlesearch.game.puzzle_game import PuzzleGame
-from puzzlesearch.search.puzzle_problem import PuzzleProblem
+from puzzlesearch.games.puzzle.puzzle_game import PuzzleGame
+from puzzlesearch.games.puzzle.puzzle_problem import PuzzleProblem
 from puzzlesearch.search.graph_search import GraphSearch
+
+"""
+TODO:
+args:
+    - game "puzzle"
+    - player "agent" | "user"
+    - search "graph"
+"""
 
 
 def parse_args(args):
     parser = argparse.ArgumentParser()
-    parser.add_argument("--user", action="store_true")
-    parser.add_argument("--size", default=2, type=int)
+    parser.add_argument("--player", default="agent", type=str)
+    parser.add_argument("--puzzle-size", dest="puzzle_size", default=2, type=int)
     return parser.parse_args(args)
-
-
-def plan_actions(board):
-    problem = PuzzleProblem(board)
-    return GraphSearch().search(problem)
 
 
 def main(args=sys.argv[1:]):
     parsed_args = parse_args(args)
-    player = ManualPlayer() if parsed_args.user else AgentPlayer(plan_actions)
-    game = PuzzleGame(parsed_args.size, player)
+    game = PuzzleGame(parsed_args.puzzle_size, parsed_args.player)
     game.start()

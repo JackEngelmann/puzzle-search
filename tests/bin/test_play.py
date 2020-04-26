@@ -6,10 +6,10 @@ from puzzlesearch.bin.play import parse_args, main
 
 class TestPlay(unittest.TestCase):
     def test_parse_args(self):
-        self.assertTrue(parse_args(["--user"]).user)
-        self.assertFalse(parse_args([]).user)
-        self.assertEqual(parse_args(["--size", "3"]).size, 3)
-        self.assertEqual(parse_args([]).size, 2)
+        self.assertEqual(parse_args(["--player", "user"]).player, "user")
+        self.assertEqual(parse_args(["--player", "agent"]).player, "agent")
+        self.assertEqual(parse_args(["--puzzle-size", "3"]).puzzle_size, 3)
+        self.assertEqual(parse_args([]).puzzle_size, 2)
 
     def test_main_agent_no_exceptions(self):
         main([])
@@ -27,5 +27,5 @@ class TestPlay(unittest.TestCase):
 
         with mock.patch("builtins.input", mock_inp):
             with self.assertRaises(RuntimeError) as cm:
-                main(["--user"])
+                main(["--player", "user"])
                 self.assertEqual(str(cm.exception), called_errror)

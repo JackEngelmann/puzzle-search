@@ -2,7 +2,7 @@ import unittest
 import mock
 import io
 
-from puzzlesearch.game.game import Game
+from puzzlesearch.games.game import Game
 
 
 class BoardMock:
@@ -19,7 +19,7 @@ class BoardMock:
         self.moves_made += 1
 
 
-class TestGame(unittest.TestCase):
+class TestPuzzleGame(unittest.TestCase):
     def test_start(self):
         with mock.patch("sys.stdout") as mock_stdout:
             board = BoardMock()

@@ -1,10 +1,9 @@
 from puzzlesearch.search.graph_search import GraphSearch
 
 
-class AgentPlayer:
-    def __init__(self, plan_actions):
+class PlayerAgent:
+    def __init__(self):
         self.planned_actions = None
-        self.plan_actions = plan_actions
 
     def get_action(self, state):
         if self.planned_actions == None:
@@ -17,3 +16,6 @@ class AgentPlayer:
         action = self.planned_actions.pop(0)
         print(f"player agent acts: {action}")
         return action
+
+    def plan_actions(self, state):
+        raise NotImplementedError()

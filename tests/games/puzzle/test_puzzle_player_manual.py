@@ -1,12 +1,12 @@
 import unittest
 import mock
 
-from puzzlesearch.players.manual_player import ManualPlayer
+from puzzlesearch.games.puzzle.puzzle_player_manual import PuzzlePlayerManual
 
 
-class TestManualPlayer(unittest.TestCase):
+class TestPuzzlePlayerManual(unittest.TestCase):
     def test_get_action_in_direction(self):
-        player = ManualPlayer()
+        player = PuzzlePlayerManual()
         self.__assert_input_does_move("down", "down", player)
         self.__assert_input_does_move("j", "down", player)
         self.__assert_input_does_move("up", "up", player)
@@ -21,7 +21,7 @@ class TestManualPlayer(unittest.TestCase):
             self.assertEqual(player.get_action(None), action)
 
     def test_get_action_repeat_when_unknown_iput(self):
-        player = ManualPlayer()
+        player = PuzzlePlayerManual()
 
         mock_input = mock.Mock(side_effect=["unknown-input", "down"])
 

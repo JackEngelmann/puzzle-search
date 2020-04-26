@@ -1,6 +1,6 @@
 import unittest
 import mock
-from puzzlesearch.game.puzzle_board import PuzzleBoard, get_random_no_moves
+from puzzlesearch.games.puzzle.puzzle_board import PuzzleBoard, get_random_no_moves
 
 board_str = """-----
 | |1|

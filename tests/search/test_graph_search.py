@@ -1,7 +1,6 @@
 import unittest
-from puzzlesearch.game.puzzle_board import PuzzleBoard
-from puzzlesearch.game.game import Game
-from puzzlesearch.search.puzzle_problem import PuzzleProblem
+from puzzlesearch.games.puzzle.puzzle_board import PuzzleBoard
+from puzzlesearch.games.puzzle.puzzle_problem import PuzzleProblem
 from puzzlesearch.search.graph_search import GraphSearch
 
 
