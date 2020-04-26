@@ -5,14 +5,6 @@ from puzzlesearch.games.puzzle.puzzle_game import PuzzleGame
 from puzzlesearch.games.puzzle.puzzle_problem import PuzzleProblem
 from puzzlesearch.search.graph_search import GraphSearch
 
-"""
-TODO:
-args:
-    - game "puzzle"
-    - player "agent" | "user"
-    - search "graph"
-"""
-
 
 def parse_args(args):
     parser = argparse.ArgumentParser()
