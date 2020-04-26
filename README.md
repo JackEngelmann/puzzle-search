@@ -1,18 +1,27 @@
 # Puzzle Search
 
-- very basic example to implement search algorithms
-- game: [15 puzzle](https://en.wikipedia.org/wiki/15_puzzle) or 8-puzzle depending on board size
-- implemented search algorithms:
-  - graph search
+Very basic example to implement search algorithms.
+
+Game: [15 puzzle](https://en.wikipedia.org/wiki/15_puzzle) or 8-puzzle depending on board size
+Implemented search algorithms:
+
+- graph search
 
 ## Setup
 
-- run `python3 setup.py install`
+Run `python3 setup.py install`
 
 ## Run Game
 
-- run `play-puzzle --size 3 --user` to play manually
-- run `play-puzzle --size 3` to let agent using search algorithm play
+Run `play-puzzle`.
+
+Parameters:
+
+- `--player`:
+  - `user` to play in the console manually
+  - `agent` to let the agent using the search algorithm play
+- `--puzzle-size`
+  - size (one dimension) of the board: e.g. `3` for 8-puzzle (3x3 board)
 
 ## Run Tests
 
