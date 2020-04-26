@@ -9,11 +9,6 @@ class Game:
     congratulation_message = "Congratulations, you won! :)"
     separator = "---------------------------------------------------------"
 
-    def __init__(self, take_turn, is_finished, print_turn=noop):
-        self.take_turn = take_turn
-        self.is_finished = is_finished
-        self.print_turn = print_turn
-
     def start(self):
         finished = False
         while not finished:
@@ -30,3 +25,12 @@ class Game:
         self.take_turn()
         print(self.separator)
         return False
+
+    def take_turn(self):
+        raise NotImplementedError()
+
+    def is_finished(self):
+        raise NotImplementedError()
+
+    def print_turn(self):
+        pass
